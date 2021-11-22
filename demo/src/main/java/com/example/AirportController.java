@@ -45,10 +45,8 @@ public class AirportController{
         return "logIn.html";
     }
     
-    
+ 
 
-
-    
 }
 
 
