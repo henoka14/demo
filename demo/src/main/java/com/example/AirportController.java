@@ -1,6 +1,7 @@
 package com.example;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,6 +28,16 @@ public class AirportController{
 
     @GetMapping(value = "/addUser")
     public String addUserEntry(AirportModel entry){
+
+        String password = entry.getPassword();
+
+        String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
+
+        entry.setPassword(hashed);
+
+
+        System.out.println("My password: "+ entry.getPassword());
+
          airportService.addUser(entry);
          return "Home.html";
     }
@@ -41,6 +52,9 @@ public class AirportController{
 
     @GetMapping(value="login")
     public String firstPageentry(AirportModel entry) {
+
+        System.out.println("My password: "+ entry.getPassword());
+
         airportService.logIn(entry);
         return "logIn.html";
     }
