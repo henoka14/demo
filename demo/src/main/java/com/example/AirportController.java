@@ -1,10 +1,12 @@
 package com.example;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 
@@ -42,22 +44,44 @@ public class AirportController{
          return "Home.html";
     }
 
-    @GetMapping(value = "/logIn")
-    public String logIn() {
-        return "logIn.html";
+    @GetMapping(value = "/login")
+    public String logInPage() {
+        return "logInPage.html";
     }
 
-    @Autowired
-    AirportService airportService2;
 
-    @GetMapping(value="login")
-    public String firstPageentry(AirportModel entry) {
 
-        System.out.println("My password: "+ entry.getPassword());
+    @GetMapping(value="/loginUser")
+    public String loginUser(AiportUser user) {
 
-        airportService.logIn(entry);
-        return "logIn.html";
+        //user: username; password (need to be hashed) (in login page)
+
+        //List, contains all users data
+        List<AirportModel> Users = airportService.getUsers();
+
+        // data created from user create page 
+        // Users = [com.example.AirportModel@7569c46c, com.example.AirportModel@64096f90]
+
+
+        // for (Users user : users)  just an example
+
+        // if(compare){
+        //     return "UserHomePage.html";
+        // }
+    
+
+        // airportService.logIn(entry);
+
+        
+
+        return "UserDoesNotExist.hmtl";
+        
     }
+
+    // @GetMapping(value="/UserHomePage")
+    // public String UserHomePage(){
+    //     return "UserHomePage.html";
+    // }
     
  
 
