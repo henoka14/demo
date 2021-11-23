@@ -1,5 +1,7 @@
 package com.example;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,10 +22,14 @@ public class AirportService {
 
     public AirportModel logIn(AirportModel airportModel){
         return airportRepository.save(airportModel);
-    
-    
     }
+
+    public List<AirportModel> getUsers(){
+        return airportRepository.findAll();
     }
+
+
+}
 
         
 
